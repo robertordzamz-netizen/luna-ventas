@@ -27,7 +27,7 @@ function createApp({ cfg, store, tiktok, clock = Date.now, log = event => consol
       if (!req.url || req.url.length > 8192 || !req.url.startsWith('/') || req.url.startsWith('//')) return send(400, { error: 'invalid_request' });
       const url = new URL(req.url, cfg.origin);
       if (req.method !== 'GET') { res.setHeader('Allow', 'GET'); return send(405, { error: 'method_not_allowed' }); }
-      if (url.pathname === '/healthz') return send(200, { status: 'ok', service: 'luna-ventas-tiktok-auth' });
+      if (url.pathname === '/health') return send(200, { status: 'ok', service: 'luna-ventas-tiktok-auth' });
       if (url.pathname === '/') return send(200, { service: 'luna-ventas-tiktok-auth' });
       if (url.pathname === '/auth/tiktok/start') {
         // No dynamic return URLs, scopes, account IDs or redirect overrides accepted.

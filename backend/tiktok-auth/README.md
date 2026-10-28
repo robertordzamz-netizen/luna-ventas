@@ -6,7 +6,7 @@ Backend independiente del sitio legal de GitHub Pages. No modifica `luna-syscom-
 
 | Ruta | Comportamiento |
 | --- | --- |
-| `GET /healthz` | Salud del proceso; no revela configuración ni credenciales. |
+| `GET /health` | Salud del proceso; no revela configuración ni credenciales. |
 | `GET /auth/tiktok/start` | Crea estado compartido, cookie de navegador y redirige al Login Kit Web. No admite parámetros. |
 | `GET /auth/tiktok/callback` | Valida y consume estado, intercambia código en servidor y persiste tokens cifrados. |
 
@@ -72,7 +72,7 @@ Proyecto `luna-cloud-510719`, región `us-central1`, servicio **existente** `lun
 
 ## Refresh e integración futura
 
-`src/refresh.js` ofrece un ayudante interno para renovar cinco minutos antes del vencimiento y conservar la nueva versión del refresh token. Usa un bloqueo compartido y escritura condicionada. No existe endpoint público para leer/renovar tokens. Un refresh ambiguo deja el bloqueo para revisión o reautorización; no reintentar ni retirar el bloqueo sin investigar. No hay trabajo periódico porque todavía no hay un consumidor de API ni conexión con la identidad del panel local. Antes de añadirlo se requiere vincular cada conexión a un usuario autorizado del panel, definir desconexión/revocación y políticas de retención.
+`src/refresh.js` ofrece un ayudante interno para renovar cinco minutos antes del vencimiento y conservar la nueva versión del refresh token. Usa un bloqueo compartido y escritura condicionada. No existe endpoint público para leer/renovar tokens. Un refresh ambiguo deja el bloqueo para revisión; puede requerir reautorizar y retirar el bloqueo tras confirmar que no quedan trabajadores en curso. No reintentar ni retirar el bloqueo sin investigar. No hay trabajo periódico porque todavía no hay un consumidor de API ni conexión con la identidad del panel local. Antes de añadirlo se requiere vincular cada conexión a un usuario autorizado del panel, definir desconexión/revocación y políticas de retención.
 
 ## Límites de validación
 

@@ -107,7 +107,7 @@ test('redirect overrides rejected; methods, routes, headers and shared budget', 
   assert.equal((await f.request('/auth/tiktok/start?redirect_uri=https://evil.test')).status, 400);
   assert.equal((await f.request('/auth/tiktok/start', { method: 'POST' })).status, 405);
   assert.equal((await f.request('/not-found')).status, 404);
-  const health = await f.request('/healthz'); assert.equal(health.status, 200);
+  const health = await f.request('/health'); assert.equal(health.status, 200);
   assert.equal(health.headers.get('cache-control'), 'no-store'); assert.equal(health.headers.get('referrer-policy'), 'no-referrer');
   for (let i = 0; i < 20; i++) assert.equal((await f.request('/auth/tiktok/start')).status, 302);
   assert.equal((await f.request('/auth/tiktok/start')).status, 429);

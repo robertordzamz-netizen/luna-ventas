@@ -27,7 +27,7 @@ async function getAccessToken({ id, crypto, store, tiktok, now = Date.now() }) {
     }
   } catch {
     // Keep the lock on uncertainty (provider may have rotated a token).
-    throw new Error('Refresh requires operator review or reauthorization');
+    throw new Error('Refresh requires operator review; reauthorization may be needed');
   }
   const held = await store.read(lock);
   await store.bucket.file(lock, { preconditionOpts: { ifGenerationMatch: held.generation } }).delete();

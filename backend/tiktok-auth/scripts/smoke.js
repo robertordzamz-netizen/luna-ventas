@@ -5,7 +5,7 @@ async function request(path, options) {
   return fetch(origin + path, { redirect: 'manual', signal: AbortSignal.timeout(30000), ...options });
 }
 async function main() {
-  const health = await request('/healthz'); assert.equal(health.status, 200);
+  const health = await request('/health'); assert.equal(health.status, 200);
   assert.equal((await health.json()).service, 'luna-ventas-tiktok-auth');
   assert.equal(health.headers.get('referrer-policy'), 'no-referrer');
   const noState = await request('/auth/tiktok/callback?code=smoke-invalid-code');
