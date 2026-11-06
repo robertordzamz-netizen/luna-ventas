@@ -1,0 +1,6 @@
+{
+  "rule": [
+    { "action": { "type": "Delete" }, "condition": { "age": 1, "matchesPrefix": ["oauth-state/", "rate-limit/"] } },
+    { "action": { "type": "Delete" }, "condition": { "age": 366, "matchesPrefix": ["tokens/"] } }
+  ]
+}
